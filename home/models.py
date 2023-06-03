@@ -101,3 +101,14 @@ class Footer(models.Model):
     def __str__(self):
         return self.title
 
+
+class Message(models.Model):
+    first_name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True, null=True)
+    unread = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.first_name

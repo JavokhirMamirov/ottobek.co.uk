@@ -11,3 +11,7 @@ admin.site.register(Project)
 admin.site.register(ProjectItem)
 admin.site.register(Contact)
 admin.site.register(Footer)
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'first_name', 'email', 'phone', 'date', 'unread']

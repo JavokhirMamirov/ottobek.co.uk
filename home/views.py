@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from home.models import *
 # Create your views here.
 def home_view(request):
@@ -37,3 +37,16 @@ def home_view(request):
         'col':col
     }
     return render(request, 'index.html', context=context)
+
+
+def send_message_view(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+
+        Message.objects.create(first_name=first_name, email=email, phone=phone, message=message)
+
+        return redirect('home')
+    return redirect('home')
