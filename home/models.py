@@ -4,8 +4,15 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class HomeBarner(models.Model):
+    TEXT_POSITION = (
+        ('text-center', 'text-center'),
+        ('text-right', 'text-right'),
+        ('text-left', 'text-left')
+    )
     text = RichTextField()
     image = models.ImageField(upload_to='images/')
+    image2 = models.ImageField(upload_to='images/', null=True, blank=True)
+    text_position = models.CharField(max_length=255, choices=TEXT_POSITION, default='text-center')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

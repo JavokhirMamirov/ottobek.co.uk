@@ -41,6 +41,12 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .logo_name{
+            font-weight: 600;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,15 +80,17 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-lg-8 col-md-9 top-bar-left">
                             <span><i class="fas fa-phone"></i> {{contact.phone}}</span>
-                            {% if contact.email is not None%}<span><i class="fas fa-message"></i> {{contact.email}}</span>{%endif%}
+                            {% if contact.email is not None%}<span><i class="fas fa-envelope"></i> {{contact.email}}</span>{%endif%}
                         </div>
                         <div class="col-lg-4 col-md-3 text-md-right">
                             <div class="social-profile">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    <li><a href="{{contact.facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="{{contact.twitter}}"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="{{contact.linkedin}}"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="{{contact.telegram}}"><i class="fab fa-telegram"></i></a></li>
+                                    <li><a href="{{contact.instagram}}"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="{{contact.youtube}}"><i class="fab fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -93,8 +101,9 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3 col-lg-2 d-flex">
-                            <a class="navbar-brand logo" href="index.html">
-                                <img src="{% static 'assets/img/logo.png' %}" class="logo-display" alt="shipo">
+                            <a class="navbar-brand logo" href="#">
+                                <span class="logo_name">OTTO&BEK LTD</span>
+                                <!-- <img src="{% static 'images/logo.png' %}" class="logo-display" alt="shipo"> -->
                             </a>                            
                         </div>
                         <div class="col-lg-10 col-md-9  d-none d-lg-block text-lg-right">
@@ -124,48 +133,40 @@
         -->
         <section class="hero-slider-area">
             <div class="hero-slides owl-carousel">
-                <div class="single-hero-slide gray-overlay bg-cover bg-top d-flex align-items-center" style="background-image: url({% static 'assets/img/slide/s1.jpg' %})">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <span>WE MAKE</span>
-                                <h1>Dream House</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dicta <br>sapiente, quo in minus nostrum praesentium quidem.</p>
-                                <a href="#" class="theme_btn get_start">Get details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-img d-none d-lg-block">
-                        <img src="{% static 'assets/img/man.png' %}" alt="">
-                    </div>
-                </div> <!-- /.single-hero-slide -->
-                <div class="single-hero-slide gray-overlay bg-cover bg-top d-flex align-items-center" style="background-image: url({% static 'assets/img/slide/s1.jpg' %})">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <span>WE MAKE</span>
-                                <h1>Dream House</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dicta <br>sapiente, quo in minus nostrum praesentium quidem.</p>
-                                <a href="#" class="theme_btn get_start">Get details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- /.single-hero-slide -->
-                <div class="single-hero-slide gray-overlay bg-cover bg-top d-flex align-items-center" style="background-image: url({% static 'assets/img/slide/s1.jpg' %})">
-                    <div class="container">
-                        <div class="row">
+                {% for barner in barners %}
+                    <div class="single-hero-slide gray-overlay bg-cover bg-top d-flex align-items-center" style="background-image: url({{barner.image.url}})">
+                        {% if barner.text_position == 'text-right' %}
+                            {% if barner.image2 %}
                             <div class="slide-img slide-img-left d-none d-lg-block">
-                                <img src="{% static 'assets/img/man.png' %}" alt="">
+                                <img src="{{ barner.image2.url }}" alt="">
                             </div>
-                            <div class="col-12 text-right">
-                                <span>WE MAKE</span>
-                                <h1>Dream House</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dicta <br>sapiente, quo in minus nostrum praesentium quidem.</p>
-                                <a href="#" class="theme_btn get_start">Get details</a>
+                            {% endif %}
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 {{barner.text_position}}">
+                                        {{barner.text|safe}}
+                                        <a href="#" class="theme_btn get_start">Get details</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div> <!-- /.single-hero-slide -->
+                        {% else %}
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 {{barner.text_position}}">
+                                        {{barner.text|safe}}
+                                        <a href="#" class="theme_btn get_start">Get details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if barner.image2 %}
+                            <div class="slide-img d-none d-lg-block">
+                                <img src="{{ barner.image2.url }}" alt="">
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        
+                    </div> <!-- /.single-hero-slide -->
+                {% endfor %}
             </div>
         </section> <!-- /.hero section -->
 
@@ -180,8 +181,7 @@
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1 col-12 text-center">
                         <div class="what-we-do-title">
-                            <span>what we do</span>
-                            <h2>We build strong brands and grow businesses through branded services, <span>digital storytelling.</span></h2>
+                            {{aboutus.title|safe}}
                         </div>
                     </div>
                 </div>
