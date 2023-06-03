@@ -52,7 +52,7 @@ class FAQItem(models.Model):
     
 class Service(models.Model):
     title = models.CharField(max_length=255)
-    icon = models.ImageField('images/', null=True, blank=True)
+    icon = models.ImageField(upload_to='images/', null=True, blank=True)
     text = RichTextField()
     is_active = models.BooleanField(default=True)
 
