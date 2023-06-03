@@ -50,9 +50,56 @@
 </head>
 
 <body>
-    
+    <style>
+         /* PRELOADER */
+        #loader {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: #ff5e10;
+        height: 100%;
+        width: 100%;
+        z-index: 99999;
+        }
+        #stringPreloader {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        }
+
+        #stringPreloader {
+            -webkit-animation: spinner 3s infinite linear;
+            animation: spinner 3s infinite linear;
+            width: 250px;
+            height: 250px;
+        }
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+        @keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+    </style>
     <!-- preloader element started -->
-    <div class="pre-loader">
+    <!-- <div class="pre-loader">
         <div class="sk-cube-grid">
           <div class="sk-cube sk-cube1"></div>
           <div class="sk-cube sk-cube2"></div>
@@ -64,8 +111,11 @@
           <div class="sk-cube sk-cube8"></div>
           <div class="sk-cube sk-cube9"></div>
         </div>
-    </div>
+    </div> -->
     <!-- preloader element end -->
+    <div id='loader' class="pre-loader">
+        <img id='stringPreloader' src="{% static 'images/loadr.png' %}"/>
+    </div>
     
     <div class="main-wrapper">
 
