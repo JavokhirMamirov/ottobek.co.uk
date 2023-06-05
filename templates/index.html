@@ -11,7 +11,7 @@
     <title>{{contact.website_title}}</title>
     
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
 
     <!-- ===========  All Stylesheet ================= -->
     <!--  fontawesome css plugins -->
@@ -72,29 +72,16 @@
         }
 
         #stringPreloader {
-            -webkit-animation: spinner 3s infinite linear;
-            animation: spinner 3s infinite linear;
+            animation: spinner 6s infinite linear;
             width: 250px;
             height: 250px;
         }
-        @-webkit-keyframes spinner {
-            0% {
-                -webkit-transform: rotate(0);
-                transform: rotate(0)
-            }
-            100% {
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg)
-            }
-        }
         @keyframes spinner {
             0% {
-                -webkit-transform: rotate(0);
-                transform: rotate(0)
+                transform: scale(0)
             }
             100% {
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg)
+                transform: scale(8)
             }
         }
     </style>
@@ -135,12 +122,24 @@
                         <div class="col-lg-4 col-md-3 text-md-right">
                             <div class="social-profile">
                                 <ul>
+                                    {% if contact.facebook != "#" and contact.facebook is not None%}
                                     <li><a href="{{contact.facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+                                    {% endif %}
+                                    {% if contact.twitter != "#" and contact.twitter is not None %}
                                     <li><a href="{{contact.twitter}}"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="{{contact.linkedin}}"><i class="fab fa-linkedin-in"></i></a></li>
+                                    {% endif %}
+                                    {% if contact.whatsapp != "#" and contact.whatsapp is not None %}
+                                    <li><a href="{{contact.whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
+                                    {% endif %}
+                                    {% if contact.telegram != "#" and contact.telegram is not None %}
                                     <li><a href="{{contact.telegram}}"><i class="fab fa-telegram"></i></a></li>
+                                    {% endif %}
+                                    {% if contact.instagram != "#" and contact.instagram is not None %}
                                     <li><a href="{{contact.instagram}}"><i class="fab fa-instagram"></i></a></li>
+                                    {% endif %}
+                                    {% if contact.youtube != "#" and contact.youtube is not None %}
                                     <li><a href="{{contact.youtube}}"><i class="fab fa-youtube"></i></a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -153,15 +152,14 @@
                         <div class="col-md-3 col-lg-2 d-flex">
                             <a class="navbar-brand logo" href="#">
                                 
-                                <img src="{% static 'images/logo.png' %}" class="logo-display" alt="shipo" style="height: 50px;">
+                                <!-- <img src="{% static 'images/logo.png' %}" class="logo-display" alt="shipo" style="height: 50px;"> -->
                                 <span class="logo_name">OTTO&BEK LTD</span>
                             </a>                            
                         </div>
                         <div class="col-lg-10 col-md-9  d-none d-lg-block text-lg-right">
                             <nav id="responsive-menu" class="menu-style-one">
                                 <ul class="menu-items">
-                                    <li><a href="#">home</a></li>
-                                    <li><a href="#whatwedo">about</a></li>
+                                    <li><a href="#home">home</a></li>
                                     <li><a href="#service">Services</a></li>
                                     <li><a href="#portfolio">All Projects</a></li>
                                     <li><a href="#contact">Contact</a></li>
@@ -182,7 +180,7 @@
             Hero Section
         ============================================== 
         -->
-        <section class="hero-slider-area">
+        <section class="hero-slider-area" id="home">
             <div class="hero-slides owl-carousel">
                 {% for barner in barners %}
                     <div class="single-hero-slide gray-overlay bg-cover bg-top d-flex align-items-center" style="background-image: url({{barner.image.url}})">
@@ -196,7 +194,7 @@
                                 <div class="row">
                                     <div class="col-12 {{barner.text_position}}">
                                         {{barner.text|safe}}
-                                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="theme_btn get_start">Contact us</button>
+                                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="theme_btn get_start">Start your project</button>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +203,7 @@
                                 <div class="row">
                                     <div class="col-12 {{barner.text_position}}">
                                         {{barner.text|safe}}
-                                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="theme_btn get_start">Contact us</button>
+                                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="theme_btn get_start">Start your project</button>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +225,7 @@
             What We Do
         ============================================== 
         -->
-        <section class="what-we-do section-padding" id="whatwedo">
+        <section class="what-we-do section-padding" id="service">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1 col-12 text-center">
@@ -237,16 +235,38 @@
                     </div>
                 </div>
                 <div class="row">
+                    {% for service in services %}
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="single-service">
+                            <div class="service-icon">
+                                <svg class="icon-shape"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 width="72px" height="81px">
+                                <path fill-rule="evenodd"  fill="rgb(242, 243, 245)"
+                                 d="M0.814,60.751 L0.814,20.254 L36.005,0.005 L71.195,20.254 L71.195,60.751 L36.005,81.000 L0.814,60.751 Z"/>
+                                </svg>
+                                <div class="service-shape-icon">
+                                    <img src="{{service.icon.url}}" alt="">
+                                </div>
+                            </div>
+                            <h3>{{service.title}}</h3>
+                            <p>{{service.text|safe}}</p>
+                        </div> <!-- /.single-service -->
+                    </div> <!-- /.col-lg-4 col-md-6 col-sm-12 -->
+                    {% endfor %}
+                </div>
+                <!-- <div class="row">
                     {% for ab_item in aboutus_items%}
                     <div class="col-lg-3 col-sm-6 text-center">
                         <div class="single-we-do">
                             <img src="{{ab_item.image.url}}" alt="">
                             <h3>{{ab_item.title}}</h3>
                             <p>{{ab_item.text|safe}}</p>
-                        </div> <!-- /.single-we-do -->
-                    </div> <!-- /.col-lg-3 col-sm-6 -->
+                        </div> 
+                    </div> 
                     {% endfor %}
-                </div>
+                </div> -->
             </div>
         </section> <!-- /.what-we-do -->
 
@@ -263,7 +283,7 @@
                         <div class="fq-ask-banner">
                             <img src="{{faq.image.url}}" alt="fq-ask">
                         </div>
-                    </div> <!-- /.col-lg-6 col-sm-12 -->
+                    </div> 
                     <div class="col-lg-6 col-sm-12">
                         <div class="theme-heading">
                             <span>Some FAQ’s</span>
@@ -290,10 +310,10 @@
                               {% endfor %}
                            </div>
                         </div>
-                    </div> <!-- /.col-lg-6 col-sm-12 -->
+                    </div> 
                 </div>
             </div>
-        </section> <!-- /.fq-ask-wrap -->
+        </section>
 
 
         <!-- 
@@ -301,7 +321,7 @@
             Our Services
         ============================================== 
         -->
-        <section class="our-services pt-120 pb-80" id="service">
+        <!--<section class="our-services pt-120 pb-80" id="service">
             <div class="container">
                 <div class="row">
                     {% for service in services %}
@@ -321,12 +341,12 @@
                             </div>
                             <h3>{{service.title}}</h3>
                             <p>{{service.text|safe}}</p>
-                        </div> <!-- /.single-service -->
-                    </div> <!-- /.col-lg-4 col-md-6 col-sm-12 -->
+                        </div> 
+                    </div> 
                     {% endfor %}
                 </div>
             </div>
-        </section> <!-- /.our-services -->
+        </section> -->
 
 
         <!-- 
@@ -403,12 +423,24 @@
                             <div class="contact-content">
                                 <h4>Follow Us</h4>
                                 <div class="follow-icons">
+                                    {% if contact.facebook != "#" and contact.facebook is not None %}
                                     <a href="{{contact.facebook}}"><i class="fab fa-facebook-f"></i></a>
+                                    {% endif %}
+                                    {% if contact.twitter != "#" and contact.twitter is not None %}
                                     <a href="{{contact.twitter}}"><i class="fab fa-twitter"></i></a>
-                                    <a href="{{contact.linkedin}}"><i class="fab fa-linkedin-in"></i></a>
+                                    {% endif %}
+                                    {% if contact.whatsapp != "#" and contact.whatsapp is not None %}
+                                    <a href="{{contact.whatsapp}}"><i class="fab fa-whatsapp"></i></a>
+                                    {% endif %}
+                                    {% if contact.telegram != "#" and contact.telegram is not None %}
                                     <a href="{{contact.telegram}}"><i class="fab fa-telegram"></i></a>
+                                    {% endif %}
+                                    {% if contact.instagram != "#" and contact.instagram is not None %}
                                     <a href="{{contact.instagram}}"><i class="fab fa-instagram"></i></a>
+                                    {% endif %}
+                                    {% if contact.youtube != "#" and contact.youtube is not None %}
                                     <a href="{{contact.youtube}}"><i class="fab fa-youtube"></i></a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

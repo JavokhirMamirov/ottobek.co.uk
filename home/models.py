@@ -70,7 +70,7 @@ class Project(models.Model):
     
 class ProjectItem(models.Model):
     title = models.CharField(max_length=255)
-    text = RichTextField()
+    text = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='images/')
     is_active = models.BooleanField(default=True)
 
@@ -87,7 +87,7 @@ class Contact(models.Model):
     telegram = models.CharField(max_length=255, null=True, blank=True)
     facebook = models.CharField(max_length=255, null=True, blank=True)
     twitter = models.CharField(max_length=255, null=True, blank=True)
-    linkedin = models.CharField(max_length=255, null=True, blank=True)
+    whatsapp = models.CharField(max_length=255, null=True, blank=True)
     youtube = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
  
