@@ -13,13 +13,13 @@ def home_view(request):
     project_items = ProjectItem.objects.filter(is_active=True)
     footer = Footer.objects.filter(is_active=True)
     if footer.count() == 0:
-        col = 0
-    elif footer.count() == 1:
         col = 12
-    elif footer.count() == 2:
+    elif footer.count() == 1:
         col = 6
-    elif footer.count() == 3:
+    elif footer.count() == 2:
         col = 4
+    elif footer.count() == 3:
+        col = 3
     else:
         col = 3
     

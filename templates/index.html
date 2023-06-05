@@ -114,7 +114,7 @@
     </div> -->
     <!-- preloader element end -->
     <div id='loader' class="pre-loader">
-        <img id='stringPreloader' src="{% static 'images/loadr.png' %}"/>
+        <img id='stringPreloader' src="{% static 'images/loadr.PNG' %}"/>
     </div>
     
     <div class="main-wrapper">
@@ -463,7 +463,7 @@
         </div>
 
         <footer class="footer-section pt-150 pb-30">
-            {% if col > 0 %}
+            
             <div class="container pb-80">
                 <div class="row">
                     {% for ft in footer%}
@@ -474,9 +474,16 @@
                         </div>
                     </div>
                     {% endfor %}
+                    <div class="col-lg-{{col}} col-md-6">
+                        <div class="single-footer-widget">
+                            <a href="http://www.checkatrade.com/LandDHomeDevelopments/" target="_self"><img src="{% static 'images/checka-t.jpg' %}" border="0" width="250" height="57" style="margin: 0 0 0 100px;" alt="Checkatrade"></a>
+                            <a href="http://www.trustatrader.com/traders/ld-home-developments-ltd-builders-elmbridge/" target="_self"><img src="{% static 'images/trusta-t.jpg' %}" border="0" width="250" height="74" style="margin: 30px 0 0 100px;" alt="Trust A Trader"></a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            {% endif %}
+            
         </footer> <!-- /.footer section -->
 
 
